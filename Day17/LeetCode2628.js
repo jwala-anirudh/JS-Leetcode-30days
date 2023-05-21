@@ -30,8 +30,8 @@ var areDeeplyEqual = function (o1, o2) {
   }
 
   // Arrays
-  if (Array.isArray(o1) || Array.isArray(o2)) {
-    if (String(o1) !== String(o2)) {
+  if (Array.isArray(o1) && Array.isArray(o2)) {
+    if (o1.length !== o2.length) {
       return false;
     }
 
@@ -41,7 +41,7 @@ var areDeeplyEqual = function (o1, o2) {
         return false;
       }
     }
-  } else {
+  } else if (!Array.isArray(o1) && !Array.isArray(o2)) {
     // Objects
     if (Object.keys(o1).length !== Object.keys(o2).length) {
       return false;
@@ -52,6 +52,8 @@ var areDeeplyEqual = function (o1, o2) {
         return false;
       }
     }
+  } else {
+    return false;
   }
 
   return true;
